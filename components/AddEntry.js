@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
+import { Ionicons } from '@expo/vector-icons'
 import { View, Text, TouchableOpacity } from "react-native";
 import { getMetricMetainfo, timeToString } from "../utils/helpers";
 import UdaciSlider from "./UdaciSlider";
 import UdaciSteppers from "./UdaciSteppers";
 import DateHeader from "./Dateheader";
+import TextButton from "./TextButton";
 
 
 function SubmitBtn ({ onPress }) {
@@ -40,7 +42,7 @@ class AddEntry extends Component {
   };
 
   increment = (metric) => {
-    const { max, step } = getMetricMetaInfo(metric);
+    const { max, step } = getMetricMetainfo(metric);
 
     this.setState((state) => {
       const count = state[metric] + step;
@@ -54,7 +56,7 @@ class AddEntry extends Component {
 
   decrement = (metric) => {
     this.setState((state) => {
-      const count = state[metric] - getMetricMetaInfo(metric).step;
+      const count = state[metric] - getMetricMetainfo(metric).step;
 
       return {
         ...state,
@@ -71,6 +73,21 @@ class AddEntry extends Component {
 
   render() {
     const metaInfo = getMetricMetainfo();
+
+    if (this.props.alreadyLogged) {
+      return (
+        <View>
+          <Ionicons
+            name='md-happy'
+            size={100}
+          />
+          <Text>You already logged your information for today.</Text>
+          <TextButton onPress={this.reset}>
+            Reset
+          </TextButton>
+        </View>
+      )
+    }
 
     return (
       <View>
