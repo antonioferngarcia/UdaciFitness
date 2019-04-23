@@ -6,6 +6,7 @@ import UdaciSlider from "./UdaciSlider";
 import UdaciSteppers from "./UdaciSteppers";
 import DateHeader from "./Dateheader";
 import TextButton from "./TextButton";
+import { removeEntry, submitEntry } from "../utils/api";
 
 
 function SubmitBtn ({ onPress }) {
@@ -32,13 +33,24 @@ class AddEntry extends Component {
 
     // Update Redux
 
-    this.setState(() => ({ run: 0, bike: 0, swim: 0, sleep: 0, eat: 0 }))
+    this.setState(() => ({ run: 0, bike: 0, swim: 0, sleep: 0, eat: 0 }));
 
     // Navigate to home
 
     // Save to "DB"
+    submitEntry({ key, entry });
 
     // Clear local notification
+  };
+
+  reset = () => {
+    const key = timeToString();
+    // Update Redux
+
+    // Route to Home
+
+    // Update "DB"
+    removeEntry(key);
   };
 
   increment = (metric) => {
