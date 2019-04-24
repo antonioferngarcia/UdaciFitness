@@ -12,7 +12,7 @@ export default class App extends Component {
   render() {
     return (
       <Provider store={this.store}>
-        <View>
+        <View style={{ flex: 1 }}>
           <AddEntry />
         </View>
       </Provider>

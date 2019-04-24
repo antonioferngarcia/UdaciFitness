@@ -1,10 +1,24 @@
 import React from 'react';
-import { View } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import { FontAwesome, MaterialIcons, MaterialCommunityIcons } from '@expo/vector-icons';
+
+import { red, orange, blue, lightPurp, pink, white } from './colors'
+
+const styles = StyleSheet.create({
+  iconContainer: {
+    padding: 5,
+    borderRadius: 8,
+    width: 50,
+    height: 50,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginRight: 20
+  },
+});
 
 export function getDailyReminderValue () {
   return {
-    today: " Don't forget to log your data today!"
+    today: "👋 Don't forget to log your data today!"
   }
 }
 
@@ -54,7 +68,11 @@ export function getMetricMetaInfo(metric) {
       unit: 'miles',
       step: 1,
       type: 'steppers',
-      getIcon: () => <View><MaterialIcons name='directions-run' color='black' size={35}/></View>
+      getIcon: () => (
+        <View style={[styles.iconContainer, {backgroundColor: red}]}>
+          <MaterialIcons name='directions-run' color={white} size={35}/>
+        </View>
+      )
     },
     bike: {
       displayName: 'Bike',
@@ -62,8 +80,11 @@ export function getMetricMetaInfo(metric) {
       unit: 'miles',
       step: 1,
       type: 'steppers',
-      getIcon: () => <View><MaterialCommunityIcons name='bike' color='black' size={35}/></View>
-
+      getIcon: () => (
+        <View style={[styles.iconContainer, {backgroundColor: orange}]}>
+          <MaterialCommunityIcons name='bike' color={white} size={35}/>
+        </View>
+      )
     },
     swim: {
       displayName: 'Swim',
@@ -71,7 +92,11 @@ export function getMetricMetaInfo(metric) {
       unit: 'meters',
       step: 100,
       type: 'steppers',
-      getIcon: () => <View><MaterialCommunityIcons name='swim' color='black' size={35}/></View>
+      getIcon: () => (
+        <View style={[styles.iconContainer, {backgroundColor: blue}]}>
+          <MaterialCommunityIcons name='swim' color={white} size={35}/>
+        </View>
+      )
 
     },
     sleep: {
@@ -80,8 +105,11 @@ export function getMetricMetaInfo(metric) {
       unit: 'hours',
       step: 1,
       type: 'slider',
-      getIcon: () => <View><FontAwesome name='bed' color='black' size={35}/></View>
-
+      getIcon: () => (
+        <View style={[styles.iconContainer, {backgroundColor: lightPurp}]}>
+          <FontAwesome name='bed' color={white} size={35}/>
+        </View>
+      )
     },
     eat: {
       displayName: 'Eat',
@@ -89,8 +117,11 @@ export function getMetricMetaInfo(metric) {
       unit: 'food',
       step: 1,
       type: 'slider',
-      getIcon: () => <View><MaterialIcons name='directions-run' color='black' size={35}/></View>
-
+      getIcon: () => (
+        <View style={[styles.iconContainer, {backgroundColor: pink}]}>
+          <MaterialIcons name='directions-run' color={white} size={35}/>
+        </View>
+      )
     }
   };
   return (typeof metric === 'undefined') ? info : info[metric];

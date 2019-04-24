@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { Ionicons } from '@expo/vector-icons'
-import { View, Text, TouchableOpacity } from "react-native";
+import { View, Text, TouchableOpacity, StyleSheet, Platform } from "react-native";
 
 import { getDailyReminderValue, getMetricMetaInfo, timeToString } from "../utils/helpers";
 import UdaciSlider from "./UdaciSlider";
@@ -10,13 +10,15 @@ import DateHeader from "./Dateheader";
 import TextButton from "./TextButton";
 import { removeEntry, submitEntry } from "../utils/api";
 import { addEntry } from "../actions/index.actions";
+import { purple, white } from "../utils/colors";
 
 
 function SubmitBtn ({ onPress }) {
   return (
     <TouchableOpacity
-      onPress={onPress}>
-      <Text>SUBMIT</Text>
+      style={Platform.OS === "ios" ? styles.iosSubmitBtn : styles.AndroidSubmitBtn }
+       onPress={onPress}>
+      <Text style={styles.submitBtnText}>SUBMIT</Text>
     </TouchableOpacity>
   )
 }
@@ -97,7 +99,7 @@ class AddEntry extends Component {
 
     if (this.props.alreadyLogged) {
       return (
-        <View>
+        <View style={styles.center}>
           <Ionicons
             name='md-happy'
             size={100}
@@ -111,7 +113,7 @@ class AddEntry extends Component {
     }
 
     return (
-      <View>
+      <View style={styles.container}>
         <DateHeader date={(new Date()).toLocaleDateString()}/>
         {Object.keys(metaInfo).map((key) => {
           const { getIcon, type, ...rest } = metaInfo[key];
@@ -152,3 +154,48 @@ function mapStateToProps (state) {
 export default connect(
   mapStateToProps
 )(AddEntry)
+
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    padding: 20,
+    backgroundColor: white
+  },
+  row: {
+    flexDirection: "row",
+    flex: 1,
+    alignItems: "center"
+  },
+  iosSubmitBtn: {
+    backgroundColor: purple,
+    padding: 10,
+    borderRadius: 7,
+    height: 45,
+    marginLeft: 40,
+    marginRight: 40
+  },
+  AndroidSubmitBtn: {
+    backgroundColor: purple,
+    padding: 10,
+    paddingLeft: 30,
+    paddingRight: 30,
+    height: 45,
+    borderRadius: 2,
+    alignSelf: "flex-end",
+    justifyContent: "center",
+    alignItems: "center"
+  },
+  submitBtnText: {
+    color: white,
+    fontSize: 22,
+    textAlign: "center"
+  },
+  center: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    marginLeft: 30,
+    marginRight: 30
+  }
+});
