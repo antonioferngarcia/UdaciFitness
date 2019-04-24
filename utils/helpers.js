@@ -2,10 +2,14 @@ import React from 'react';
 import { View } from 'react-native';
 import { FontAwesome, MaterialIcons, MaterialCommunityIcons } from '@expo/vector-icons';
 
+export function getDailyReminderValue () {
+  return {
+    today: " Don't forget to log your data today!"
+  }
+}
+
 export function isBetween (num, x, y) {
   return num >= x && num <= y;
-
-
 }
 
 export function calculateDirection (heading) {
@@ -42,7 +46,7 @@ export function timeToString (time = Date.now()) {
   return todayUTC.toISOString().split('T')[0]
 }
 
-export function getMetricMetainfo(metric) {
+export function getMetricMetaInfo(metric) {
   const info = {
     run: {
       displayName: 'Run',
