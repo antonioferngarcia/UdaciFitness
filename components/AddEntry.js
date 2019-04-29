@@ -105,7 +105,7 @@ class AddEntry extends Component {
             size={100}
           />
           <Text>You already logged your information for today.</Text>
-          <TextButton onPress={this.reset}>
+          <TextButton style={{ padding: 10 }} onPress={this.reset}>
             Reset
           </TextButton>
         </View>
@@ -120,7 +120,7 @@ class AddEntry extends Component {
           const value = this.state[key];
 
           return (
-            <View key={key}>
+            <View key={key} style={styles.row}>
               {getIcon()}
               {type === 'slider'
                 ? <UdaciSlider
