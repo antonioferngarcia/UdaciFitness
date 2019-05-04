@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { Ionicons } from '@expo/vector-icons'
+import { NavigationActions } from 'react-navigation'
 import { View, Text, TouchableOpacity, StyleSheet, Platform } from "react-native";
 
 import { getDailyReminderValue, getMetricMetaInfo, timeToString } from "../utils/helpers";
@@ -44,6 +45,7 @@ class AddEntry extends Component {
     this.setState(() => ({ run: 0, bike: 0, swim: 0, sleep: 0, eat: 0 }));
 
     // Navigate to home
+    this.toHome();
 
     // Save to "DB"
     submitEntry({ key, entry });
@@ -59,6 +61,7 @@ class AddEntry extends Component {
     }));
 
     // Route to Home
+    this.toHome();
 
     // Update "DB"
     removeEntry(key);
@@ -92,6 +95,11 @@ class AddEntry extends Component {
     this.setState(() => ({
       [metric]: value
     }))
+  };
+
+
+  toHome = () => {
+    this.props.navigation.dispatch(NavigationActions.back({key: 'AddEntry'}))
   };
 
   render() {
