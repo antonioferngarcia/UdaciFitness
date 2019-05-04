@@ -13,6 +13,7 @@ import entries from './reducers/index.reducer';
 import History from './components/History';
 import { purple, white } from './utils/colors'
 import Live from './components/Live';
+import { setLocalNotification } from './utils/helpers';
 
 function UdaciStatusBar ({backgroundColor, ...props}) {
   return (
@@ -92,6 +93,10 @@ const MainNavigator = createAppContainer(createStackNavigator({
 }));
 
 export default class App extends Component {
+
+  componentDidMount() {
+    setLocalNotification();
+  }
 
   store = createStore(entries);
 

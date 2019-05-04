@@ -4,7 +4,13 @@ import { Ionicons } from '@expo/vector-icons'
 import { NavigationActions } from 'react-navigation'
 import { View, Text, TouchableOpacity, StyleSheet, Platform } from "react-native";
 
-import { getDailyReminderValue, getMetricMetaInfo, timeToString } from "../utils/helpers";
+import {
+  clearLocalNotification,
+  getDailyReminderValue,
+  getMetricMetaInfo,
+  setLocalNotification,
+  timeToString
+} from "../utils/helpers";
 import UdaciSlider from "./UdaciSlider";
 import UdaciSteppers from "./UdaciSteppers";
 import DateHeader from "./Dateheader";
@@ -51,6 +57,8 @@ class AddEntry extends Component {
     submitEntry({ key, entry });
 
     // Clear local notification
+    clearLocalNotification()
+      .then(setLocalNotification())
   };
 
   reset = () => {
