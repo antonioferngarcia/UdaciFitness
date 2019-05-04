@@ -23,7 +23,11 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "org.udacifitness.exp"
+    },
+    "android": {
+      "package": "org.udacifitness.exp"
     }
   }
 }
